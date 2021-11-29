@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2" elementFormDefault="qualified" targetNamespace="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://test.edmbilisim.com.tr/EFaturaEDM21hk/EFaturaEDM.svc?xsd=xsd4" namespace="urn:un:unece:uncefact:codelist:specification:54217:2001" />
+  <xs:complexType name="AmountType">
+    <xs:simpleContent>
+      <xs:extension base="xs:decimal">
+        <xs:attribute xmlns:q1="urn:un:unece:uncefact:codelist:specification:54217:2001" name="currencyID" type="q1:CurrencyCodeContentType" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>

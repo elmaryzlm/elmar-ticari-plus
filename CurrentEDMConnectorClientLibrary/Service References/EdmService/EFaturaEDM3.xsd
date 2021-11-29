@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://test.edmbilisim.com.tr/EFaturaEDM21hk/EFaturaEDM.svc?xsd=xsd1" namespace="http://schemas.i2i.com/ei/common" />
+  <xs:import schemaLocation="https://test.edmbilisim.com.tr/EFaturaEDM21hk/EFaturaEDM.svc?xsd=xsd2" namespace="http://www.w3.org/2005/05/xmlmime" />
+  <xs:import schemaLocation="https://test.edmbilisim.com.tr/EFaturaEDM21hk/EFaturaEDM.svc?xsd=xsd3" namespace="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2" />
+  <xs:element name="LoginRequest" type="tns:LoginRequest" />
+  <xs:complexType name="LoginRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="USER_NAME" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="PASSWORD" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="REQUEST">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REQUEST_HEADER" type="tns:REQUEST_HEADERType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="REQUEST_HEADERType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SESSION_ID" type="xs:token" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="CLIENT_TXN_ID" type="xs:token" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="INTL_TXN_ID" type="xs:long" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="INTL_PARENT_TXN_ID" type="xs:long" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ACTION_DATE" type="xs:dateTime" />
+      <xs:element xmlns:q1="http://schemas.i2i.com/ei/common" minOccurs="0" maxOccurs="1" form="unqualified" name="CHANGE_INFO" type="q1:CHANGE_INFOType" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REASON" type="xs:token" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="APPLICATION_NAME" type="xs:token" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="HOSTNAME" type="xs:token" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="CHANNEL_NAME" type="xs:token" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SIMULATION_FLAG" type="xs:token" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="COMPRESSED" type="xs:token" />
+      <xs:element xmlns:q2="http://schemas.i2i.com/ei/common" minOccurs="0" maxOccurs="unbounded" form="unqualified" name="ATTRIBUTES" type="q2:ATTRIBUTESTYPE" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetInvoiceSerialRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="INVOICESERIALCODE" type="xs:token" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="INVOICESENDTYPE" type="xs:token" />
+          <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="YEAR" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CheckCounterRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LogoutRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="UserRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="USERCONTENT" type="tns:USERCONTENT" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="USERCONTENT">
+    <xs:simpleContent>
+      <xs:extension xmlns:q3="http://www.w3.org/2005/05/xmlmime" base="q3:base64Binary">
+        <xs:attribute name="USERID" type="xs:string" />
+        <xs:attribute default="USER" name="USERTYPE" type="tns:USERTYPE" />
+        <xs:attribute name="SIGNTYPE" type="tns:SIGNTYPE" />
+        <xs:attribute name="TYPE" type="tns:USERCONTENTTYPE" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="USERTYPE">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="USER" />
+      <xs:enumeration value="ARCHIVE" />
+      <xs:enumeration value="EARCHIVE" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SIGNTYPE">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="HSM_CUSTOMER" />
+      <xs:enumeration value="HSM_ENTEGRATOR" />
+      <xs:enumeration value="HSM_CLIENT_SIGNED" />
+      <xs:enumeration value="TOKEN_CUSTOMER" />
+      <xs:enumeration value="TOKEN_ENTEGRATOR" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="USERCONTENTTYPE">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PROCESSUSER" />
+      <xs:enumeration value="CANCELUSER" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="SendInvoiceRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SENDER">
+            <xs:complexType>
+              <xs:attribute name="vkn" type="xs:string" />
+              <xs:attribute name="alias" type="xs:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="RECEIVER">
+            <xs:complexType>
+              <xs:attribute name="vkn" type="xs:string" />
+              <xs:attribute name="alias" type="xs:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="INVOICE" type="tns:INVOICE" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="INVOICE">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="HEADER">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SENDER" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="RECEIVER" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SUPPLIER" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="CUSTOMER" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ISSUE_DATE" type="xs:date" />
+            <xs:element xmlns:q4="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2" minOccurs="0" maxOccurs="1" form="unqualified" name="PAYABLE_AMOUNT" type="q4:AmountType" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="FROM" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="TO" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="PROFILEID" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="STATUS" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="STATUS_DESCRIPTION" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="GIB_STATUS_CODE" type="xs:int" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="GIB_STATUS_DESCRIPTION" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="RESPONSE_CODE" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="RESPONSE_DESCRIPTION" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="FILENAME" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="HASH" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="CDATE" type="xs:dateTime" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ENVELOPE_IDENTIFIER" type="xs:token" />
+            <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="INTERNETSALES" type="xs:boolean" />
+            <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="EARCHIVE" type="xs:boolean" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="INTERNETSALESDETAILS">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element minOccurs="0" maxOccurs="1" name="webAdresi" type="xs:string" />
+                  <xs:element minOccurs="0" maxOccurs="1" name="odemeSekli" type="xs:string" />
+                  <xs:element minOccurs="0" maxOccurs="1" name="odemeAracisiAdi" type="xs:string" />
+                  <xs:element minOccurs="0" maxOccurs="1" name="odemeTarihi" type="xs:date" />
+                  <xs:element minOccurs="0" maxOccurs="1" name="gonderiBilgileri">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element minOccurs="1" maxOccurs="1" name="gonderimTarihi" type="xs:date" />
+                        <xs:element minOccurs="0" maxOccurs="1" name="gonderiTasiyan">
+                          <xs:complexType>
+                            <xs:sequence>
+                              <xs:element minOccurs="0" maxOccurs="1" name="tuzelKisi">
+                                <xs:complexType>
+                                  <xs:sequence>
+                                    <xs:element minOccurs="0" maxOccurs="1" name="vkn" type="xs:string" />
+                                    <xs:element minOccurs="0" maxOccurs="1" name="unvan" type="xs:string" />
+                                  </xs:sequence>
+                                </xs:complexType>
+                              </xs:element>
+                              <xs:element minOccurs="0" maxOccurs="1" name="gercekKisi">
+                                <xs:complexType>
+                                  <xs:sequence>
+                                    <xs:element minOccurs="0" maxOccurs="1" name="tckn" type="xs:string" />
+                                    <xs:element minOccurs="0" maxOccurs="1" name="adiSoyadi" type="xs:string" />
+                                  </xs:sequence>
+                                </xs:complexType>
+                              </xs:element>
+                            </xs:sequence>
+                          </xs:complexType>
+                        </xs:element>
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="INVOICESERIAL_REQUESTED" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="EXPORT_GTB_REFNO" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="EXPORT_GTB_GCB_TESCILNO" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="EXPORT_GTB_FIILI_IHRACAT_TARIHI" type="xs:date" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="INVOICE_TYPE" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="INVOICE_SEND_TYPE" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="EARCHIVE_REPORT_UUID" type="xs:token" />
+            <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="EARCHIVE_REPORT_SENDDATE" type="xs:date" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="EARCHIVE_REPORT_STATUS" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="EARCHIVE_REPORT_STATUSDESC" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="CANCEL_EARCHIVE_REPORT_UUID" type="xs:token" />
+            <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="CANCEL_EARCHIVE_REPORT_SENDDATE" type="xs:date" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="CANCEL_EARCHIVE_REPORT_STATUSDESC" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="CANCEL_EARCHIVE_REPORT_STATUS" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ERP_REFERENCE" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="DIRECTION" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ISACTIVE" type="xs:boolean" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="MOBILE" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="MARKED" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element xmlns:q5="http://www.w3.org/2005/05/xmlmime" minOccurs="0" maxOccurs="1" form="unqualified" name="CONTENT" type="q5:base64Binary" />
+    </xs:sequence>
+    <xs:attribute name="TRXID" type="xs:long" use="required" />
+    <xs:attribute name="UUID" type="xs:token" />
+    <xs:attribute name="ID" type="xs:token" />
+  </xs:complexType>
+  <xs:complexType name="GetInvoiceRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="INVOICE_SEARCH_KEY">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LIMIT" type="xs:int" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ID" type="xs:normalizedString" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="UUID" type="xs:normalizedString" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="FROM" type="xs:token" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="TO" type="xs:token" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="START_DATE" type="xs:date" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="END_DATE" type="xs:date" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="READ_INCLUDED" type="xs:boolean" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="DIRECTION" type="xs:token" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SENDER" type="xs:token" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="RECEIVER" type="xs:token" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="CR_START_DATE" type="xs:dateTime" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="CR_END_DATE" type="xs:dateTime" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="CONNECTORSTATUSDESCRIPTION" type="xs:token" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ISARCHIVED" type="xs:boolean" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" default="N" form="unqualified" name="HEADER_ONLY" type="xs:token" />
+          <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="INVOICE_CONTENT_TYPE" type="tns:INVOICE_CONTENT_TYPE" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="INVOICE_CONTENT_TYPE">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="XML" />
+      <xs:enumeration value="PDF" />
+      <xs:enumeration value="ALL" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="MarkInvoiceRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="MARK">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="INVOICE" type="tns:INVOICE" />
+              </xs:sequence>
+              <xs:attribute name="value">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:enumeration value="READ" />
+                    <xs:enumeration value="UNREAD" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:attribute>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PrepareInvoiceResponseRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="STATUS" type="xs:token" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="INVOICE" type="tns:INVOICE" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="DESCRIPTION" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SendInvoiceResponseRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element xmlns:q6="http://www.w3.org/2005/05/xmlmime" minOccurs="0" maxOccurs="unbounded" form="unqualified" name="APPRESPONSE" type="q6:base64Binary" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SendInvoiceResponseWithServerSignRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="STATUS" type="xs:token" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="INVOICE" type="tns:INVOICE" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="DESCRIPTION" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="CREATERETURNINVOICE" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GetUserListRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REGISTER_TIME_START" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REMOVED_TIME_START" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REMOVED_ONLY" type="xs:boolean" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="DOCUMENTTYPE" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="UNIT" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GetUserListBinaryRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" default="XML" form="unqualified" name="TYPE">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="CSV" />
+                <xs:enumeration value="XML" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CheckUserRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="USER" type="tns:GIBUSER" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GIBUSER">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="IDENTIFIER" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ALIAS" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="TITLE" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="TYPE" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REGISTER_TIME" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="UNIT" type="xs:token" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ALIAS_CREATION_TIME" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ALIAS_REMOVAL_TIME" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="DOCUMENTTYPE" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetInvoiceStatusRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="INVOICE" type="tns:INVOICE" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GetInvoiceStatusAllRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="UUID" type="xs:token" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LoadInvoiceRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="INVOICE" type="tns:INVOICE" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SENDER">
+            <xs:complexType>
+              <xs:attribute name="vkn" type="xs:string" />
+              <xs:attribute name="alias" type="xs:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="RECEIVER">
+            <xs:complexType>
+              <xs:attribute name="vkn" type="xs:string" />
+              <xs:attribute name="alias" type="xs:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="GENERATEINVOICEIDONLOAD" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GetEnvelopeRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ENVELOPE_SEARCH_KEY">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LIMIT" type="xs:int" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="IDENTIFIER" type="xs:normalizedString" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="FROM" type="xs:token" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="TO" type="xs:token" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="START_DATE" type="xs:date" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="END_DATE" type="xs:date" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="READ_INCLUDED" type="xs:boolean" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="DIRECTION" type="xs:token" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SENDER" type="xs:token" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="RECEIVER" type="xs:token" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="TYPE" type="xs:token" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ELEMENT">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="TYPE" type="xs:token" />
+                      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="UUID" type="xs:token" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" default="N" form="unqualified" name="HEADER_ONLY" type="xs:token" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="MarkEnvelopeRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="MARK">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="ENVELOPE">
+                  <xs:complexType>
+                    <xs:attribute name="INSTANCEIDENTIFIER" type="xs:token" />
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+              <xs:attribute name="value">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:enumeration value="READ" />
+                    <xs:enumeration value="UNREAD" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:attribute>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GetEnvelopeStatusRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="ENVELOPE">
+            <xs:complexType>
+              <xs:attribute name="INSTANCEIDENTIFIER" type="xs:token" />
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="LoginResponse" type="tns:LoginResponse" />
+  <xs:complexType name="LoginResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REQUEST_RETURN" type="tns:REQUEST_RETURNType" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SESSION_ID" type="xs:token" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="REQUEST_RETURNType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="INTL_TXN_ID" type="xs:long" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="CLIENT_TXN_ID" type="xs:token" />
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="RETURN_CODE" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="WARNINGS" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RequestFault" type="tns:REQUEST_ERRORType" />
+  <xs:complexType name="REQUEST_ERRORType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="INTL_TXN_ID" type="xs:long" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="CLIENT_TXN_ID" type="xs:token" />
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="ERROR_CODE" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ERROR_SHORT_DES" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ERROR_LONG_DES" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="STACKTRACE" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ERROR_ELEMENT_INDEX" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LogoutRequest" type="tns:LogoutRequest" />
+  <xs:element name="LogoutResponse" type="tns:LogoutResponse" />
+  <xs:complexType name="LogoutResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REQUEST_RETURN" type="tns:REQUEST_RETURNType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LoadInvoiceRequest" type="tns:LoadInvoiceRequest" />
+  <xs:element name="LoadInvoiceResponse" type="tns:LoadInvoiceResponse" />
+  <xs:complexType name="LoadInvoiceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REQUEST_RETURN" type="tns:REQUEST_RETURNType" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="INVOICE" type="tns:INVOICE" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SendInvoiceRequest" type="tns:SendInvoiceRequest" />
+  <xs:element name="SendInvoiceResponse" type="tns:SendInvoiceResponse" />
+  <xs:complexType name="SendInvoiceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REQUEST_RETURN" type="tns:REQUEST_RETURNType" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="INVOICE" type="tns:INVOICE" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetInvoiceRequest" type="tns:GetInvoiceRequest" />
+  <xs:element name="GetInvoiceResponse" type="tns:ArrayOfINVOICE" />
+  <xs:complexType name="ArrayOfINVOICE">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="INVOICE" type="tns:INVOICE" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MarkInvoiceRequest" type="tns:MarkInvoiceRequest" />
+  <xs:element name="MarkInvoiceResponse" type="tns:MarkInvoiceResponse" />
+  <xs:complexType name="MarkInvoiceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REQUEST_RETURN" type="tns:REQUEST_RETURNType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetUserListRequest" type="tns:GetUserListRequest" />
+  <xs:element name="GetUserListResponse" type="tns:GetUserListResponse" />
+  <xs:complexType name="GetUserListResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Items" type="tns:GetUserListResponseX" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetUserListResponseX">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Items" type="tns:GIBUSER" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetUserListBinaryRequest" type="tns:GetUserListBinaryRequest" />
+  <xs:element name="GetUserListBinaryResponse" type="tns:GetUserListBinaryResponse" />
+  <xs:complexType name="GetUserListBinaryResponse">
+    <xs:sequence>
+      <xs:element xmlns:q7="http://www.w3.org/2005/05/xmlmime" minOccurs="0" maxOccurs="1" form="unqualified" name="Item" type="q7:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CheckUserRequest" type="tns:CheckUserRequest" />
+  <xs:element name="CheckUserResponse" type="tns:ArrayOfGIBUSER" />
+  <xs:complexType name="ArrayOfGIBUSER">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="USER" type="tns:GIBUSER" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetInvoiceStatusRequest" type="tns:GetInvoiceStatusRequest" />
+  <xs:element name="GetInvoiceStatusResponse" type="tns:GetInvoiceStatusResponse" />
+  <xs:complexType name="GetInvoiceStatusResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="INVOICE_STATUS">
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="tns:INVOICE">
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="STATUS" type="xs:string" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="STATUS_DESCRIPTION" type="xs:string" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="GIB_STATUS_CODE" type="xs:int" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="GIB_STATUS_DESCRIPTION" type="xs:string" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="RESPONSE_CODE" type="xs:string" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="RESPONSE_DESCRIPTION" type="xs:string" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="CDATE" type="xs:dateTime" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ENVELOPE_IDENTIFIER" type="xs:token" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="EARCHIVE_REPORT_STATUS" type="xs:token" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="EARCHIVE_CANCEL_REPORT_STATUS" type="xs:token" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="EARCHIVE_REPORT_STATUS_DESC" type="xs:token" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="EARCHIVE_CANCEL_REPORT_STATUS_DESC" type="xs:token" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="DIRECTION" type="xs:token" />
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PrepareInvoiceResponseRequest" type="tns:PrepareInvoiceResponseRequest" />
+  <xs:element name="PrepareInvoiceResponseResponse" type="tns:ArrayOfBase64Binary" />
+  <xs:complexType name="ArrayOfBase64Binary">
+    <xs:sequence>
+      <xs:element xmlns:q8="http://www.w3.org/2005/05/xmlmime" minOccurs="0" maxOccurs="unbounded" form="unqualified" name="APPRESPONSE" type="q8:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SendInvoiceResponseRequest" type="tns:SendInvoiceResponseRequest" />
+  <xs:element name="SendInvoiceResponseResponse" type="tns:SendInvoiceResponseResponse" />
+  <xs:complexType name="SendInvoiceResponseResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REQUEST_RETURN" type="tns:REQUEST_RETURNType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SendInvoiceResponseWithServerSignRequest" type="tns:SendInvoiceResponseWithServerSignRequest" />
+  <xs:element name="SendInvoiceResponseWithServerSignResponse" type="tns:SendInvoiceResponseWithServerSignResponse" />
+  <xs:complexType name="SendInvoiceResponseWithServerSignResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REQUEST_RETURN" type="tns:REQUEST_RETURNType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetEnvelopeRequest" type="tns:GetEnvelopeRequest" />
+  <xs:element name="GetEnvelopeResponse" type="tns:ArrayOfENVELOPE" />
+  <xs:complexType name="ArrayOfENVELOPE">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="ENVELOPE" type="tns:ENVELOPE" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ENVELOPE">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="HEADER">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SENDER" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="RECEIVER" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="FROM" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="TO" type="xs:token" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="DATE" type="xs:date" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="STATUS" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="STATUS_DESCRIPTION" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="GIB_STATUS_CODE" type="xs:int" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="GIB_STATUS_DESCRIPTION" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="TYPE" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element xmlns:q9="http://www.w3.org/2005/05/xmlmime" minOccurs="0" maxOccurs="1" form="unqualified" name="CONTENT" type="q9:base64Binary" />
+    </xs:sequence>
+    <xs:attribute name="INSTANCEIDENTIFIER" type="xs:token" />
+  </xs:complexType>
+  <xs:element name="MarkEnvelopeRequest" type="tns:MarkEnvelopeRequest" />
+  <xs:element name="MarkEnvelopeResponse" type="tns:MarkEnvelopeResponse" />
+  <xs:complexType name="MarkEnvelopeResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REQUEST_RETURN" type="tns:REQUEST_RETURNType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetEnvelopeStatusRequest" type="tns:GetEnvelopeStatusRequest" />
+  <xs:element name="GetEnvelopeStatusResponse" type="tns:ArrayOfENVELOPE" />
+  <xs:element name="CancelInvoiceRequest" type="tns:CancelInvoiceRequest" />
+  <xs:complexType name="CancelInvoiceRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="INVOICE" type="tns:INVOICE" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CancelInvoiceResponse" type="tns:CancelInvoiceResponse" />
+  <xs:complexType name="CancelInvoiceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REQUEST_RETURN" type="tns:REQUEST_RETURNType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetSessionInfoRequest" type="tns:GetSessionInfoRequest" />
+  <xs:complexType name="GetSessionInfoRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SESION_ID" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GetSessionInfoResponse" type="tns:GetSessionInfoResponse" />
+  <xs:complexType name="GetSessionInfoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REQUEST_RETURN" type="tns:REQUEST_RETURNType" />
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="ISVALID" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="EXISTFROM" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="GETSECURETOKEN" type="xs:token" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EmailInvoiceRequest" type="tns:EmailInvoiceRequest" />
+  <xs:complexType name="EmailInvoiceRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="INVOICE" type="tns:INVOICE" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="EMAILS" type="xs:token" />
+          <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="INVOICE_CONTENT_TYPE" type="tns:INVOICE_CONTENT_TYPE" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EmailInvoiceResponse" type="tns:EmailInvoiceResponse" />
+  <xs:complexType name="EmailInvoiceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REQUEST_RETURN" type="tns:REQUEST_RETURNType" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REMARK" type="xs:token" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArchiveInvoiceRequest" type="tns:ArchiveInvoiceRequest" />
+  <xs:complexType name="ArchiveInvoiceRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:REQUEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ARCHIVE">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="INVOICE" type="tns:INVOICE" />
+              </xs:sequence>
+              <xs:attribute name="value">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:enumeration value="ARCHIVE" />
+                    <xs:enumeration value="DEARCHIVE" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:attribute>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ArchiveInvoiceResponse" type="tns:ArchiveInvoiceResponse" />
+  <xs:complexType name="ArchiveInvoiceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REQUEST_RETURN" type="tns:REQUEST_RETURNType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CheckCounterRequest" type="tns:CheckCounterRequest" />
+  <xs:element name="CheckCounterResponse" type="tns:CheckCounterResponse" />
+  <xs:complexType name="CheckCounterResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="COUNTER_LEFT" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetInvoiceSerialRequest" type="tns:GetInvoiceSerialRequest" />
+  <xs:element name="GetInvoiceSerialResponse" type="tns:GetInvoiceSerialResponse" />
+  <xs:complexType name="GetInvoiceSerialResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Items" type="tns:GetInvoiceSerialResponseX" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetInvoiceSerialResponseX">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Items" type="tns:INVOICESERIALLIST" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="INVOICESERIALLIST">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="INVOICESERIALCODE" type="xs:token" />
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="YEAR" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SOURCESYSTEMNAME" type="xs:token" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="COMPANYNAME" type="xs:token" />
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="COMPANYID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="LASTINVOICEDATEUSED" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="LASTSERIALUSED" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="INVOİCESENDTYPE" type="xs:token" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

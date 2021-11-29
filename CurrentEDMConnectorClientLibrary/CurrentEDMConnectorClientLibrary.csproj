@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D77D7839-A0F1-4D07-BA64-87D17D83E05E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CurrentEDMConnectorClientLibrary</RootNamespace>
+    <AssemblyName>CurrentEDMConnectorClientLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\EDM(management)\Teknik Dokümanlar\E-Fatura _ E-Arşiv\SimplePrograms\Ornek.NetKonnektor\EDMConnectorClientSampleForCustomers\CurrentClientLibrary\bin\x64\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\..\..\..\EDM(management)\Teknik Dokümanlar\E-Fatura _ E-Arşiv\SimplePrograms\Ornek.NetKonnektor\EDMConnectorClientSampleForCustomers\CurrentClientLibrary\bin\x64\Debug\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UbltrClassLibrary">
+      <HintPath>..\UbltrClassLibrary\bin\Debug\UbltrClassLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CustomExtensions.cs" />
+    <Compile Include="Entities\FormParameters.cs" />
+    <Compile Include="Entities\FormValues.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\EdmService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="TesterCurrentEDM.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="License.log" />
+    <None Include="packages.config" />
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.ArchiveInvoiceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.base64Binary.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.CancelInvoiceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.CheckCounterResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.EmailInvoiceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.ENVELOPE.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.getAppRespResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.GetInvoiceSerialResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.GetInvoiceStatusResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.GetSessionInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.GetUserListBinaryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.GetUserListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.GIBUSER.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.INVOICE.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.LoadInvoiceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.LoginResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.LogoutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.MarkEnvelopeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.MarkInvoiceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.SendInvoiceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.SendInvoiceResponseResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\CurrentEDMConnectorClientLibrary.EdmService.SendInvoiceResponseWithServerSignResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EdmService\EFaturaEDM.wsdl" />
+    <None Include="Service References\EdmService\EFaturaEDM.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EdmService\EFaturaEDM1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EdmService\EFaturaEDM2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EdmService\EFaturaEDM3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EdmService\EFaturaEDM4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EdmService\EFaturaEDM5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Settings.aiis" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="default.xslt" />
+    <None Include="Service References\EdmService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\EdmService\configuration.svcinfo" />
+    <None Include="Service References\EdmService\configuration91.svcinfo" />
+    <None Include="Service References\EdmService\EFaturaEDM.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\EdmService\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

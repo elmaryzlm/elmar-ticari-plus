@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="C#" CodeBehind="Service1.asmx.cs" Class="Web_Service_Elmar_Ticari_Mobile.Service1" %>

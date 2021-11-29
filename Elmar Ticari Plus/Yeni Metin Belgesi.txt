@@ -1,0 +1,45 @@
+ public void terazi()
+        {
+
+            egelen = "0";
+            if (sp3.IsOpen != true)
+            {
+                sp3.PortName = terazicom;
+                try
+                {
+                    sp3.Open();
+                    sp3.Write("On");
+                    sp3.Write("8888");
+                    for (int y = 0; y < 1;)
+                    {
+                        string gelen = sp3.ReadLine();
+                        if (gelen.StartsWith("+"))
+                        {
+                            sp3.Close();
+                            gelen = gelen.Replace(" ", "").ToString();
+                            gelen = gelen.Replace("+", "");
+                            int kgIndex = gelen.IndexOf("kg");
+                            if (kgIndex > -1)
+                            {
+                                gelen = gelen.Substring(0, kgIndex);
+                            }
+                            if (gelen != egelen)
+                            {
+                                //textBox1.Text = gelen;
+                                egelen = gelen;
+                                y = 5;
+                            }
+                            else
+                            {
+                                sp3.Open();
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+                //  timer1.Start();
+            }
+        }
